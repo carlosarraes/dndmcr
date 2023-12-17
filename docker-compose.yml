@@ -1,7 +1,7 @@
 version: "3.8"
 
 services:
-  postgres:
+  hero-postgres:
     image: postgres:16
     container_name: hero_db
     environment:
@@ -11,7 +11,19 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - pgdata:/var/lib/postgresql/data
+      - hero_pgdata:/var/lib/postgresql/data
+  monster-postgres:
+    image: postgres:16
+    container_name: monster_db
+    environment:
+      POSTGRES_DB: monster_db
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+    ports:
+      - "5433:5432"
+    volumes:
+      - monster_pgdata:/var/lib/postgresql/data
 
 volumes:
-  pgdata:
+  hero_pgdata:
+  monster_pgdata:
