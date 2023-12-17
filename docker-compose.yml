@@ -16,7 +16,7 @@ services:
     image: postgres:16
     container_name: monster_db
     environment:
-      POSTGRES_DB: monster_db
+      POSTGRES_DB: monsterdb
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
     ports:
