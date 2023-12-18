@@ -22,6 +22,7 @@ public class MonsterController {
   @GET
   @WithTransaction
   public Uni<RestResponse<List<Monster>>> findAll() {
+    logger.info("findAll");
     return monsterService.findAll().onItem().transform(RestResponse::ok);
   }
 
@@ -33,6 +34,7 @@ public class MonsterController {
     try {
       return monsterService.findById(id).onItem().transform(RestResponse::ok);
     } catch (Exception e) {
+      logger.info("findById: " + e.getMessage());
       return Uni.createFrom().item(RestResponse.status(404, "Monster not found"));
     }
   }
@@ -52,6 +54,7 @@ public class MonsterController {
     try {
       return monsterService.update(id, monster).onItem().transform(RestResponse::ok);
     } catch (Exception e) {
+      logger.info("update: " + e.getMessage());
       return Uni.createFrom().item(RestResponse.status(404, "Monster not found"));
     }
   }
@@ -64,6 +67,7 @@ public class MonsterController {
     try {
       return monsterService.delete(id).onItem().transform(RestResponse::ok);
     } catch (Exception e) {
+      logger.info("delete: " + e.getMessage());
       return Uni.createFrom().item(RestResponse.status(404, "Monster not found"));
     }
   }

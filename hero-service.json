@@ -1,0 +1,11 @@
+{
+  "ID": "hero-service",
+  "Name": "hero-service",
+  "Tags": ["hero", "quarkus"],
+  "Address": "hero-service",
+  "Port": 8080,
+  "Check": {
+    "http": "http://hero-service:8080/q/health/live",
+    "interval": "10s"
+  }
+}

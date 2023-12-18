@@ -1,0 +1,11 @@
+{
+  "ID": "monster-service",
+  "Name": "monster-service",
+  "Tags": ["monster", "quarkus"],
+  "Address": "monster-service",
+  "Port": 8081,
+  "Check": {
+    "http": "http://monster-service:8081/q/health/live",
+    "interval": "10s"
+  }
+}

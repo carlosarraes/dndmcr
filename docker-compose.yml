@@ -23,6 +23,30 @@ services:
       - "5433:5432"
     volumes:
       - monster_pgdata:/var/lib/postgresql/data
+  hero-service:
+    build: ./hero
+    container_name: hero-service-container
+    ports:
+      - "8080:8080"
+    depends_on:
+      - hero-postgres
+      - monster-postgres
+      - consul
+  monster-service:
+    build: ./monster
+    container_name: monster-service-container
+    ports:
+      - "8081:8081"
+    depends_on:
+      - hero-postgres
+      - monster-postgres
+      - consul
+  consul:
+    image: consul:1.7
+    command: agent -dev -ui -client=0.0.0.0 -bind=0.0.0.0 --https-port=8501
+    ports:
+      - "8500:8500"
+      - "8501:8501"
 
 volumes:
   hero_pgdata:
