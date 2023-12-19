@@ -152,6 +152,15 @@ URL: http://localhost:8080
 
 ## Consul
 
-Consul service discovery pode ser acessado atraves do endereco: `http://localhost:8500/ui/`
+O Consul é utilizado primariamente para o service discovery no projeto, facilitando a comunicação e descoberta de serviços na rede de microserviços.
 
-PS.: Lembre de adicionar os servicos que tem no passo 5 da área Setup.
+### Acesso à Interface do Usuário do Consul
+
+- Service Discovery: Acesse a interface do usuário do Consul para visualizar os serviços registrados e suas respectivas informações de saúde através do endereço: http://localhost:8500/ui/
+
+### Tracing Distribuído
+
+- Tracing com @Traced: Este projeto utiliza a anotação @Traced do MicroProfile para habilitar o tracing distribuído nos serviços. Isso permite monitorar o fluxo das requisições e identificar potenciais gargalos ou problemas. Embora o Consul não forneça visualização direta de traces, as informações de tracing podem ser observadas nos logs dos containers.
+  - Para visualizar os logs que incluem informações de tracing, você pode usar os comandos do Docker para cada serviço. Por exemplo:
+    - Para o serviço de monstros: `docker logs monster-service`
+    - Para o serviço de heróis: `docker logs hero-service`
