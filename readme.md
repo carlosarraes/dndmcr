@@ -22,7 +22,7 @@ Os dados de heróis e monstros são persistentemente armazenados, permitindo que
 
 ### Clone o repositório
 
-`git clone `
+`git clone https://github.com/carlosarraes/dndmcr.git`
 
 ### Construção dos Serviços
 
