@@ -13,9 +13,11 @@ import java.util.logging.Logger;
 import org.acme.model.Hero;
 import org.acme.service.HeroService;
 import org.acme.service.MonsterService;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.jboss.resteasy.reactive.RestResponse;
 
 @Path("/hero")
+@Traced
 public class HeroController {
   @Inject HeroService heroService;
   @Inject MonsterService monsterService;

@@ -11,9 +11,11 @@ import java.util.logging.Logger;
 import org.acme.model.Monster;
 import org.acme.service.AdventureService;
 import org.acme.service.MonsterService;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.jboss.resteasy.reactive.RestResponse;
 
 @Path("/adventure")
+@Traced
 public class AdventureController {
   @Inject AdventureService adventureService;
   @Inject MonsterService monsterService;

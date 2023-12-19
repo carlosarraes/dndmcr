@@ -5,9 +5,11 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.transaction.Transactional;
 import org.acme.model.Monster;
 import org.acme.restclients.MonsterClient;
+import org.eclipse.microprofile.opentracing.Traced;
 import org.eclipse.microprofile.rest.client.inject.RestClient;
 
 @ApplicationScoped
+@Traced
 public class MonsterService {
   @RestClient MonsterClient monsterClient;
 
