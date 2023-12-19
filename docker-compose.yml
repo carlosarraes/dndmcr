@@ -12,6 +12,12 @@ services:
       - "5432:5432"
     volumes:
       - hero_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d herodb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   monster-postgres:
     image: postgres:16
     container_name: monster_db
@@ -23,24 +29,34 @@ services:
       - "5433:5432"
     volumes:
       - monster_pgdata:/var/lib/postgresql/data
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d monsterdb"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   hero-service:
     build: ./hero
     container_name: hero-service-container
     ports:
       - "8080:8080"
     depends_on:
-      - hero-postgres
-      - monster-postgres
-      - consul
+      hero-postgres:
+        condition: service_healthy
+      consul:
+        condition: service_started
+
   monster-service:
     build: ./monster
     container_name: monster-service-container
     ports:
       - "8081:8081"
     depends_on:
-      - hero-postgres
-      - monster-postgres
-      - consul
+      monster-postgres:
+        condition: service_healthy
+      consul:
+        condition: service_started
+
   consul:
     image: consul:1.7
     command: agent -dev -ui -client=0.0.0.0 -bind=0.0.0.0 --https-port=8501
